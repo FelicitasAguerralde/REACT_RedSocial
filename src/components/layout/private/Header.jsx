@@ -5,8 +5,8 @@ export const Header = () => {
     
     <header className="layout__navbar">
 
-            <div classNameName="navbar__header">
-                <a href="#" classNameName="navbar__title">Red Social</a>
+            <div className="navbar__header">
+                <a href="#" className="navbar__title">Red Social</a>
             </div>
 
             <Nav />

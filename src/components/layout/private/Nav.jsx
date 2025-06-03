@@ -1,5 +1,5 @@
-import React from "react"
-import avatar from "../../../assets/img/user.png"
+import React from "react";
+import avatar from "../../../assets/img/user.png";
 
 export const Nav = () => {
   return (
