@@ -5,10 +5,12 @@ import { PrivateLayout } from "../components/layout/private/PrivateLayout";
 import { PublicLayout } from "../components/layout/public/PublicLayout";
 import { Login } from "../components/user/Login";
 import { Register } from "../components/user/Register";
+import { AuthProvider } from "../context/AuthProvider";
 
 export const Routing = () => {
   return (
     <BrowserRouter>
+    <AuthProvider>
       <Routes>
         <Route path="/" element={<PublicLayout />}>
           <Route index element={<Login />} />
@@ -33,6 +35,7 @@ export const Routing = () => {
           }
         />
       </Routes>
+      </AuthProvider>
     </BrowserRouter>
   );
 };

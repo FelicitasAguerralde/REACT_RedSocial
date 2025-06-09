@@ -4,11 +4,13 @@ import { Global } from "../../helpers/Global";
 import { useForm } from "../../hooks/useForm";
 
 export const Login = () => {
+
+  // Estado del formulario
   const { form, changed } = useForm({});
 
   const loginUser = async (e) => {
     e.preventDefault();
-    const { email, password } = form;
+    const { password } = form;
     //console.log("Login data:", { email, password });
 
     // Validación de longitud de contraseña
@@ -32,6 +34,9 @@ export const Login = () => {
       //console.log("Respuesta del servidor:", response);
 
       if (response.status === "success") {
+        // Guarda el token y el usuario en localStorage
+        localStorage.setItem("token", response.token);
+        localStorage.setItem("user", JSON.stringify(response.user));
         toast.success("¡Login exitoso!");
       } else {
         toast.error("Error al iniciar sesión. Verifica tus datos.");
