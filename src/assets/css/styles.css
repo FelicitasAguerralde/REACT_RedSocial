@@ -89,6 +89,34 @@ body {
   padding-left: 1.5rem;
 }
 
+.container-image {
+  border-radius: 30px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-nav{
+  width: 40px;
+  height: 40px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.container-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.image-sidebar{
+  width: 70px;
+  height: 70px;
+  margin-right: 10px;
+}
+
 .container-lists__menu-list {
   display: flex;
   flex-direction: row;
