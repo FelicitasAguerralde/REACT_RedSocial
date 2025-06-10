@@ -1,21 +1,28 @@
+import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Global } from "../../helpers/Global";
+import { useAuth } from "../../hooks/useAuth";
 import { useForm } from "../../hooks/useForm";
 
 export const Login = () => {
+  const [loading, setLoading] = useState(false);
 
   // Estado del formulario
   const { form, changed } = useForm({});
 
+  const {setAuth} = useAuth();
+
   const loginUser = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const { password } = form;
     //console.log("Login data:", { email, password });
 
     // Validación de longitud de contraseña
     if (!password || password.length < 8) {
       toast.error("La contraseña debe tener al menos 8 caracteres.");
+      setLoading(false);
       return;
     }
 
@@ -38,12 +45,17 @@ export const Login = () => {
         localStorage.setItem("token", response.token);
         localStorage.setItem("user", JSON.stringify(response.user));
         toast.success("¡Login exitoso!");
+
+        // Redirección a /social
+
       } else {
         toast.error("Error al iniciar sesión. Verifica tus datos.");
       }
     } catch (error) {
       toast.error("Error al iniciar sesión. Verifica tus datos.");
       console.error("Error en la petición:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -67,7 +79,12 @@ export const Login = () => {
             </label>
             <input type="password" name="password" onChange={changed} />
           </div>
-          <input type="submit" value="Logueate" className="btn btn-success" />
+          <input 
+            type="submit" 
+            value={loading ? "Cargando..." : "Logueate"} 
+            className={`btn btn-success ${loading ? 'loading' : ''}`}
+            disabled={loading}
+          />
         </form>
       </div>
     </>

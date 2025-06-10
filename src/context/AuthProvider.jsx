@@ -7,6 +7,7 @@ export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState({});
   const [counters, setCounters] = useState({});
   const [publicationsCount, setPublicationsCount] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     authUser();
@@ -16,6 +17,7 @@ export const AuthProvider = ({ children }) => {
     const token = localStorage.getItem("token");
     const user = localStorage.getItem("user");
     if (!token || !user) {
+      setLoading(false);
       return false;
     }
 
@@ -76,10 +78,12 @@ export const AuthProvider = ({ children }) => {
     } else {
       setPublicationsCount(0);
     }
+
+    setLoading(false);
   };
 
   return (
-    <AuthContext.Provider value={{ auth, setAuth, counters, publicationsCount }}>
+    <AuthContext.Provider value={{ auth, setAuth, counters, publicationsCount, loading }}>
       {children}
     </AuthContext.Provider>
   );
